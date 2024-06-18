@@ -2,8 +2,9 @@
 
 
 use App\Http\Controllers\Dashboard\CategoriesController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -14,7 +15,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Route::middleware('auth')->as('dashboard)->prefix('dashboard')->group(function(){
+//////////////////
+//});
+Route::group(
+    ['middleware'=>['auth'],
+        'prefix'=>'dashboard'
+    ], function (){
+    Route::get('/',[DashboardController::class,'index'])->middleware(['auth'])->name('dashboard');
 
-Route::get('/dashboard',[DashboardController::class,'index'])->middleware(['auth'])->name('dashboard');
+    Route::resource('/categories',CategoriesController::class);
 
-Route::resource('dashboard/categories',CategoriesController::class);
+});
+
+

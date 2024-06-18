@@ -2,14 +2,24 @@
 @section('title','Categories')
 @section('breadcrumb','Categories Page')
 @section('content')
-    <div class="btn-5">
+    <div class="mb-5">
         <a href="{{route('categories.create')}}" class="btn btn-sm btn-outline-primary">Create</a>
 
     </div>
 
-    @if(session('session'))
-        <div class="alert alert-success" role="alert">
+    @if(session('success'))
+        <div class="alert alert-info" role="alert">
             {{session('success')}}
+        </div>
+    @endif
+    @if(session('update'))
+        <div class="alert alert-info" role="alert">
+            {{session('update')}}
+        </div>
+    @endif
+    @if(session('delete'))
+        <div class="alert alert-info" role="alert">
+            {{session('delete')}}
         </div>
     @endif
     <table class="table">
@@ -32,13 +42,12 @@
                 <td>{{$category->name}}</td>
                 <td>{{$category->parent_id}}</td>
                 <td>{{$category->created_at}}</td>
-                <td>{{$category->id}}</td>
                 <td><a href="{{route('categories.edit',$category->id)}}" class="btn btn-sm btn-outline-success">Edit</a></td>
                 <td>
                     <form action="{{route('categories.destroy',$category->id)}}" method="post">
                         @csrf
-                        @method('destroy')
-                        <button type="submit" class="btn btn-sm btn-outline-dander">Delete</button>
+                        @method('delete')
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                     </form>
 
                 </td>

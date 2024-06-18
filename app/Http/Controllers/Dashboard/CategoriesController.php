@@ -37,7 +37,6 @@ class CategoriesController extends Controller
             'slug'=>Str::slug($request->input('name'))
         ]);
 
-
         $category = Category::create($request->all());
 
         return redirect()->route('categories.index')->with('success',"Category Created !");
@@ -57,7 +56,9 @@ class CategoriesController extends Controller
         public
         function edit(string $id)
         {
-            //
+            $category = Category::query()->findOrFail($id);
+            $parents = Category::where('id',"<>",$id)->whereNull('parent_id')->orwhere('parent_id',"<>",$id)->get();
+            return view('dashboard.categories.edit', compact('category','parents'));
         }
 
         /**
@@ -66,7 +67,11 @@ class CategoriesController extends Controller
         public
         function update(Request $request, string $id)
         {
-            //
+            $category = Category::query()->findOrFail($id);
+            $category ->update($request->all());
+
+            return redirect()->route('categories.index')->with('update',"Category Update !");
+
         }
 
         /**
@@ -75,6 +80,10 @@ class CategoriesController extends Controller
         public
         function destroy(string $id)
         {
-            //
+            $category = Category::query()->findOrFail($id);
+            $category->delete();
+            return redirect()->route('categories.index')->with('Delete',"Category Delete !");
+
+
         }
     }
