@@ -24,7 +24,8 @@ class CategoriesController extends Controller
     public function create()
     {
         $parents = Category::all();
-        return view('dashboard.categories.create', compact('parents'));
+        $category = Category::all();
+        return view('dashboard.categories.create', compact("category",'parents'));
 
     }
 
@@ -53,37 +54,35 @@ class CategoriesController extends Controller
         /**
          * Show the form for editing the specified resource.
          */
-        public
-        function edit(string $id)
+        public function edit(string $id)
         {
             $category = Category::query()->findOrFail($id);
-            $parents = Category::where('id',"<>",$id)->whereNull('parent_id')->orwhere('parent_id',"<>",$id)->get();
+
+            $parents = Category::where('id',"<>",$id)
+                ->where(function ($query) use ($id) {
+                    $query->whereNull('parent_id')
+                        ->orWhere('parent_id',"<>",$id);
+                })->get();
+
             return view('dashboard.categories.edit', compact('category','parents'));
         }
-
         /**
          * Update the specified resource in storage.
          */
-        public
-        function update(Request $request, string $id)
+        public function update(Request $request, string $id)
         {
             $category = Category::query()->findOrFail($id);
             $category ->update($request->all());
 
             return redirect()->route('categories.index')->with('update',"Category Update !");
-
         }
-
         /**
          * Remove the specified resource from storage.
          */
-        public
-        function destroy(string $id)
+        public function destroy(string $id)
         {
             $category = Category::query()->findOrFail($id);
             $category->delete();
             return redirect()->route('categories.index')->with('Delete',"Category Delete !");
-
-
         }
     }
