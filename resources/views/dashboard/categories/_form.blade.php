@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="">Category Name</label>
-    <input type="text" name="name" class="form-control" value="{{$category->name}}">
+    <input type="text" name="name" class="form-control" value="{{$category->name }}">
 </div>
 
 <div class="form-group">
@@ -19,6 +19,10 @@
 <div class="form-group">
     <label for="">Image</label>
     <input type="file" name="image" class="form-control" >
+    @if ($category->image)
+        <br>
+        <img src="{{asset('storage/'.$category->image)}}" height="60" alt=""/>
+    @endif
 </div>
 <div class="form-group">
     <label for="">Status</label>
