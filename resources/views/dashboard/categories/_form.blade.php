@@ -10,13 +10,8 @@
     </div>
 @endif
 <div class="form-group">
-    <label for="">Category Name</label>
-    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')??$category->name }}">
-    @error('name')
-    <div class="text-danger">
-        {{$error}}
-    </div>
-    @enderror
+
+    <x-form.input label="Category Name" class="form-control" type="text" name="name" :value="$category->name"/>
 </div>
 
 <div class="form-group">
@@ -24,7 +19,8 @@
     <select name="parent_id" class="form-control @error('parent_id') is-invalid @enderror form-select">
         <option value=""> Primary Category</option>
         @foreach($parents as $parent )
-            <option value="{{$parent->id}}" @selected(old('parent_id' ,$category->parent_id)== $parent->id)>{{$parent->name}}</option>
+            <option
+                value="{{$parent->id}}" @selected(old('parent_id' ,$category->parent_id)== $parent->id)>{{$parent->name}}</option>
         @endforeach
     </select>
 </div>
@@ -34,17 +30,15 @@
 </div>
 @enderror
 <div class="form-group">
-    <label for="">Description</label>
-    <textarea name="description" class="form-control  @error('description') is-invalid @enderror"> {{old('description')??$category->description}}</textarea>
-</div>
+
+    <x-form.textarea label="Description" class="form-control" name="description" :value="$category->description" />
 @error('description')
 <div class="text-danger">
     {{$error}}
 </div>
 @enderror
 <div class="form-group">
-    <label for="">Image</label>
-    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" >
+    <x-form.input label="Image" type="file" name="image" class="form-control @error('image') is-invalid @enderror" />
     @if ($category->image)
         <br>
         <img src="{{asset('storage/'.$category->image)}}" height="60" alt=""/>
@@ -57,26 +51,13 @@
 @enderror
 <div class="form-group">
     <label for="">Status</label>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="status" value="active"
-            @checked(old('status',$category->status)=="active")>
-        <label class="form-check-label">
-            Active
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="status" value="archived"  @checked(old('status',$category->status)=="archived")>
-        <label class="form-check-label">
-            Archived
-        </label>
-    </div>
+
+    <x-form.radio class="form-check-input" name="status" :checked="$category->status" :options="['active'=>'Active','archived'=>'Archived']"  />
+
 </div>
-@error('status')
-<div class="text-danger">
-    {{$error}}
-</div>
-@enderror
+
 <div class="form-group">
     <label for=""></label>
     <button type="submit" class="btn btn-sm btn-outline-primary">Submit</button>
+</div>
 </div>
