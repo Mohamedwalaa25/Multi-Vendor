@@ -10,14 +10,13 @@ use Illuminate\View\Component;
 class Nav extends Component
 {
     protected $items;
-    protected $active;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
       $this->items=config('nav');
-       $this->active=Route::currentRouteName();
+
     }
 
     /**
@@ -27,7 +26,6 @@ class Nav extends Component
     {
         return view('components.nav',[
             'items'=>$this->items,
-            'active'=>$this->active,
 
         ]);
     }

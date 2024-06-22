@@ -1,11 +1,9 @@
 @extends('layouts.dashboard')
-@section('title','Categories')
-@section('breadcrumb','Categories Page')
+@section('title',' Trashed Categories')
+@section('breadcrumb','Trashed Categories Page')
 @section('content')
     <div class="mb-5">
-        <a href="{{route('categories.create')}}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
-
-        <a href="{{route('categories.trash')}}" class="btn btn-sm btn-outline-dark">Trash</a>
+        <a href="{{route('categories.index')}}" class="btn btn-sm btn-outline-primary">Back</a>
 
     </div>
 
@@ -27,9 +25,8 @@
             <th>Image</th>
             <th>ID</th>
             <th>Name</th>
-            <th>Parent</th>
             <th>Status</th>
-            <th>Created_At</th>
+            <th>Deleted_At</th>
             <th colspan="2">Action</th>
         </tr>
         </thead>
@@ -40,13 +37,16 @@
                     <td><img src="{{asset('storage/'.$category->image)}}" height="50" alt=""/></td>
                     <td>{{$category->id}}</td>
                     <td>{{$category->name}}</td>
-                    <td>{{$category->parent_name}}</td>
                     <td>{{$category->status}}</td>
-                    <td>{{$category->created_at}}</td>
-                    <td><a href="{{route('categories.edit',$category->id)}}"
-                           class="btn btn-sm btn-outline-success">Edit</a></td>
+                    <td>{{$category->deleted_at}}</td>
+                    <td> <form action="{{route('categories.restore',$category->id)}}" method="post">
+                            @csrf
+                            @method('put')
+                            <button type="submit" class="btn btn-sm btn-outline-info">Restore</button>
+                        </form>
+                    </td>
                     <td>
-                        <form action="{{route('categories.destroy',$category->id)}}" method="post">
+                        <form action="{{route('categories.force-delete',$category->id)}}" method="post">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
@@ -57,7 +57,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="8"> No Categories Found.</td>
+                <td colspan="7"> No Categories Found.</td>
             </tr>
         @endif
         </tbody>
