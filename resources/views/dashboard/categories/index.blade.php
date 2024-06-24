@@ -12,7 +12,7 @@
     <x-alert/>
     <form action="{{URL::current()}}" method="get" class="d-flex justify-content-between mb-4">
         <x-form.input name="name" placeholder="Name" class="mx-2" :value="request('name')" />
-        <select name="status" class="form-control mx-2" >
+         <select name="status" class="form-control mx-2" >
             <option value="" >All</option>
             <option value="active"@selected(request('status')=='active') >Active</option>
             <option value="archived" @selected(request('status')=='archived')>Archived</option>
@@ -28,6 +28,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Parent</th>
+            <th>Product #</th>
             <th>Status</th>
             <th>Created_At</th>
             <th colspan="2">Action</th>
@@ -39,8 +40,9 @@
                 <tr>
                     <td><img src="{{asset('storage/'.$category->image)}}" height="50" alt=""/></td>
                     <td>{{$category->id}}</td>
-                    <td>{{$category->name}}</td>
+                    <td><a href="{{ route('categories.show',$category->id)}}"> {{$category->name}} </a></td>
                     <td>{{$category->parent_name}}</td>
+                    <td>{{$category->products_count}}</td>
                     <td>{{$category->status}}</td>
                     <td>{{$category->created_at}}</td>
                     <td><a href="{{route('categories.edit',$category->id)}}"
@@ -57,7 +59,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="8"> No Categories Found.</td>
+                <td colspan="9"> No Categories Found.</td>
             </tr>
         @endif
         </tbody>

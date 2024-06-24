@@ -13,6 +13,13 @@ class Category extends Model
 
     protected $fillable=['name','description','image','parent_id','status','slug'];
 
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+
     public function scopeActive(Builder $builder)
     {
         $builder->where('categories.status','=','active');

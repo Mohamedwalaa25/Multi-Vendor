@@ -24,8 +24,9 @@ class CategoriesController extends Controller
             'parents.id','=','categories.parent_id')
             ->select([
                 'categories.*',
-                'parents.name as parent_name'
-            ])
+                'parents.name as parent_name'  // => with('parent') relation name
+            ])->selectRaw('(SELECT COUNT(*) FROM products WHERE category_id = categories.id) as products_count') //=>withCount('products) relation name =>relation_name_count
+
             ->filter($request->query())->paginate(5);
         return view('dashboard.categories.index', compact('categories'));
     }
@@ -64,10 +65,10 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public
-    function show(string $id)
+    public function show(Category $category)
     {
-        //
+
+        return view('dashboard.categories.show', compact('category'));
     }
 
     /**

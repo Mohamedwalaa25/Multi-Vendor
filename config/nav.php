@@ -14,4 +14,10 @@ return [
         'title' => 'Categories',
         'active' => 'categories.*',
     ],
+    [
+        'icon' => "far fa-circle nav-icon",
+        "route" => "products.index",
+        'title' => 'Products',
+        'active' => 'products.*',
+    ],
 ];
