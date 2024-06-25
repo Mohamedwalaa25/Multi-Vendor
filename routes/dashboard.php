@@ -4,6 +4,7 @@
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,10 @@ Route::group(
 
     Route::resource('/categories',CategoriesController::class);
     Route::resource('/products',ProductController::class);
+
+    Route::get('profile',[ProfileController::class,'edit'])->name('profile.edit');
+    Route::patch('profile',[ProfileController::class,'update'])->name('profile.update');
+
 
 
 });

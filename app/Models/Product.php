@@ -11,13 +11,31 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'store_id',
+        'category_id',
+        'name',
+        'slug',
+        'description',
+        'image',
+        'price',
+        'compare_price',
+        'status',
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
+
     public function store()
     {
-        return $this->belongsTo(Store::class,'store_id','id');
+        return $this->belongsTo(Store::class, 'store_id', 'id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
     protected static function booted()

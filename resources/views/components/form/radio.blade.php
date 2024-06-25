@@ -1,7 +1,9 @@
 @props([
-    'name','options','value'=>"",'text'=>"" , "checked"=>false
+    'name','label','options','value'=>"",'text'=>"" , "checked"=>false
 ])
-
+@if($label)
+    <label for="">{{$label}}</label>
+@endif
 @foreach($options as $value=>$text)
     <div class="form-check">
         <input {{$attributes}} type="radio" name="{{$name}}" value="{{$value}}"
@@ -10,7 +12,7 @@
             {{ $text}}
         </label>
     </div>
-    @error('${{$name}}')
+    @error($name)
     <div class="text-danger">
         {{$message}}
     </div>
