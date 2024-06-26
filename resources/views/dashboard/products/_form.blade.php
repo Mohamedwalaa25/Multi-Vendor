@@ -69,10 +69,8 @@
 
     <div class="form-group">
 
-
         <x-form.radio label="Status" class="form-check-input" name="status" :checked="$product->status"
                       :options="['active'=>'Active','draft' =>'Draft','archived'=>'Archived']"/>
-
     </div>
 
 

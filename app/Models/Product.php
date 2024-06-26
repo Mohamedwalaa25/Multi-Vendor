@@ -5,7 +5,9 @@ namespace App\Models;
 use App\Models\Scopes\StoreScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -48,4 +50,30 @@ class Product extends Model
 //        });
         static::addGlobalScope('store', new StoreScope());
     }
+
+    public function scopeActive($query)
+    {
+        $query->where('status', '=', 'active');
+    }
+
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return "https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png";
+        }
+        if (Str::startsWith($this->image, ['http://', 'https://'])) {
+            return $this->image;
+        }
+
+        return asset('storage/'.$this->image);
+    }
+
+    public function getSalePercentAttribute()
+    {
+        if (!$this->compare_price) {
+            return 0;
+        }
+        return round(100 - (100 * $this->price / $this->compare_price), 1);
+    }
+
 }
