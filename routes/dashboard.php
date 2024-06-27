@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 //////////////////
 //});
 Route::group(
-    ['middleware'=>['auth'],
+    ['middleware'=>['auth','auth.type:super-admin,admin'],
         'prefix'=>'dashboard'
     ], function (){
     Route::get('/',[DashboardController::class,'index'])->middleware(['auth'])->name('dashboard');
