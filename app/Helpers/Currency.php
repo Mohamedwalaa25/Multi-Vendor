@@ -9,7 +9,7 @@ class Currency
     public static function format($amount, $currency = null)
     {
         $formatter = new NumberFormatter('en', NumberFormatter::CURRENCY);
-        if ($currency = null) {
+        if ($currency == null) {
 
             $currency = 'EUR';
         }
