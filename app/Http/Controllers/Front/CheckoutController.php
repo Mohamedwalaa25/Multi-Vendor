@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\OrderCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -16,19 +17,25 @@ class CheckoutController extends Controller
 {
     public function create(CartRepository $cart)
     {
-        if($cart->get()->count()==0){
-            return  redirect()->route('home');
+        if ($cart->get()->count() == 0) {
+            return redirect()->route('home');
         }
         return view('front.checkout', [
             'cart' => $cart,
-            'countries'=>Countries::getNames(),
+            'countries' => Countries::getNames(),
         ]);
     }
 
     public function store(Request $request, CartRepository $cart)
     {
 
-        // $request->validate([]);
+         $request->validate([
+             'addr.billing.first_name'=>['required','string','max:255'],
+             'addr.billing.last_name'=>['required','string','max:255'],
+             'addr.billing.email'=>['required','string','max:255'],
+             'addr.billing.phone_number'=>['required','string','max:255'],
+             'addr.billing.city'=>['required','string','max:255'],
+         ]);
 
         $items = $cart->get()->groupBy('product.store_id')->all();
 
@@ -56,9 +63,10 @@ class CheckoutController extends Controller
                     $order->addresses()->create($address);
                 }
             }
-
-            $cart->empty();
             DB::commit();
+
+            event(new OrderCreated($order));
+
         } catch (Throwable $e) {
             DB::rollBack();
             throw $e;
