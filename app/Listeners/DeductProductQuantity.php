@@ -23,12 +23,18 @@ class DeductProductQuantity
     /**
      * Handle the event.
      */
-    public function handle($event): void
+    public function handle($event)
     {
-        foreach (Cart::get() as $item) {
-            Product::where('id','=',$item->product_id)->update([
-                'quantity'=>DB::raw('quantity - '.$item->quantity)
-            ]);
+        try {
+            foreach (Cart::get() as $item) {
+                Product::where('id','=',$item->product_id)->update([
+                    'quantity'=>DB::raw('quantity - '.$item->quantity)
+                ]);
+            }
+        }catch (\Throwable $e) {
+            return redirect()->back()->with('error', 'The order is no longer available');
+
         }
+
     }
 }

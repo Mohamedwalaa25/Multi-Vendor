@@ -20,6 +20,13 @@
         </div>
     </x-slot>
 <section class="checkout-wrapper section">
+    @if (\Session::has('error'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{!! \Session::get('error') !!}</li>
+            </ul>
+        </div>
+    @endif
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
