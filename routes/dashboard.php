@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 //////////////////
 //});
 Route::group(
-    ['middleware'=>['auth','auth.type:super-admin,admin'],
-        'prefix'=>'dashboard'
+    ['middleware'=>['auth:admin'],
+        'prefix'=>'admin/dashboard'
     ], function (){
     Route::get('/',[DashboardController::class,'index'])->middleware(['auth'])->name('dashboard');
     Route::get('/categories/trash',[CategoriesController::class,'trash'])->name('categories.trash');
