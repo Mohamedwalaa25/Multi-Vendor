@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Scopes\StoreScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
 
@@ -25,6 +25,13 @@ class Product extends Model
         'status',
     ];
 
+    protected $appends =[
+        'image_url'
+    ];
+
+    protected $hidden =[
+        'image'
+    ];
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -42,6 +49,10 @@ class Product extends Model
 
     protected static function booted()
     {
+
+        static::creating(function (Product $product){
+            $product->slug =Str::slug($product->name);
+        });
 //        static::addGlobalScope('store', function (Builder $builder) {
 //            $user = Auth::user();
 //            if ($user->store_id) {
@@ -75,5 +86,30 @@ class Product extends Model
         }
         return round(100 - (100 * $this->price / $this->compare_price), 1);
     }
+
+    public function scopeFilter(Builder $builder , $filters)
+    {
+        $options =array_merge([
+            'store_id'=>null,
+            'category_id'=>null,
+            'tag_id'=>null,
+            'status'=>'active',
+        ],$filters);
+        $builder->when($options['status'], function($builder, $value) {
+            $builder->where('status', $value);
+        });
+        $builder->when($options['store_id'], function($builder, $value) {
+            $builder->where('store_id', $value);
+        });
+        $builder->when($options['category_id'], function($builder, $value) {
+            $builder->where('category_id', $value);
+        });
+        $builder->when($options['tag_id'], function($builder, $value) {
+            $builder->whereHas('tags', function($builder) use ($value) {
+                $builder->whereIn('id', $value);
+            });
+        });
+    }
+
 
 }

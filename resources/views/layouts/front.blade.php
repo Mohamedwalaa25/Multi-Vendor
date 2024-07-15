@@ -474,6 +474,7 @@
 <script src="{{asset('assets/js/glightbox.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
 @stack('scripts')
+
 </body>
 
 </html>
