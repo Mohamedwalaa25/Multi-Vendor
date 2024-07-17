@@ -62,15 +62,17 @@
                             </li>
                             <li>
                                 <div class="select-position">
-                                    <select id="select5">
-                                        <option value="0" selected>English</option>
+                                    <form action="{{URL::current()}}" method="get" >
+                                    <select name="locale"  onchange="this.form.submit()">
+                                        <option value="en" selected>English</option>
                                         <option value="1">Español</option>
                                         <option value="2">Filipino</option>
                                         <option value="3">Français</option>
-                                        <option value="4">العربية</option>
+                                        <option value="ar">العربية</option>
                                         <option value="5">हिन्दी</option>
                                         <option value="6">বাংলা</option>
                                     </select>
+                                    </form>
                                 </div>
                             </li>
                         </ul>
@@ -79,9 +81,9 @@
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-middle">
                         <ul class="useful-links">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="index.html">{{__('Home')}}</a></li>
+                            <li><a href="about-us.html">{{__('About Us')}}</a></li>
+                            <li><a href="contact.html">{{__('Contact Us')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -95,7 +97,7 @@
                             </div>
                             <ul class="user-login">
                                 <li>
-                                    <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout').submit()">Sign Out</a>
+                                    <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout').submit()"> {{__('Sign Out')}}</a>
                                 </li>
                                 <form id="logout" action="{{route('logout')}}" method="post">
                                     @csrf
@@ -106,14 +108,14 @@
                     @else
                         <div class="user">
                             <i class="lni lni-user"></i>
-                            Hello
+                            {{__('Hello')}}
                         </div>
                         <ul class="user-login">
                             <li>
-                                <a href="{{route('login')}}">Sign In</a>
+                                <a href="{{route('login')}}"> {{__('Sign In')}}</a>
                             </li>
                             <li>
-                                <a href="{{route('register')}}">Register</a>
+                                <a href="{{route('register')}}">{{__('Register')}}</a>
                             </li>
                         </ul>
                     @endauth
