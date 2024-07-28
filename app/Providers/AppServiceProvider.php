@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\CurrencyConverter;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
@@ -22,11 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $locale = request('locale', Cookie::get('locale', config('app.locale')));
-        App::setLocale($locale);
-        Cookie::queue('locale', $locale, 60 * 24 * 365);
-
-//        App::setLocale(request('local'),'en');
+        $this->app->bind('currency.converter', function () {
+            return new CurrencyConverter(config('services.currency_converter.api_key'));
+        });
         Paginator::useBootstrap();
     }
 }

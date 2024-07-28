@@ -15,7 +15,7 @@ class CurrencyConverter
         $this->apiKey = $apiKey;
     }
 
-    public function convert(string $from, string $to, float $amount = 1): float
+    public function convert(string $from, string $to, float $amount = 1)
     {
         $q = "{$from}_{$to}";
         $response = Http::baseUrl($this->baseUrl)
@@ -26,7 +26,7 @@ class CurrencyConverter
             ]);
 
         $result = $response->json();
-
+dd($result);
         return $result[$q]['val'] * $amount;
     }
 }
