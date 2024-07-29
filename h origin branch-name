@@ -1,0 +1,149 @@
+[33mcommit 957a4469525fb234c2acd1f53aa1474cb996771e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Sun Jul 28 18:19:52 2024 +0300
+
+    add1
+
+[33mcommit 8a2efc2600a5b3d0e871e200516257e5aae31c7a[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Sun Jul 28 03:52:32 2024 +0300
+
+    add-livewire
+
+[33mcommit 7eed789173ec7fcb1043140923434f11ebf87d18[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Wed Jul 17 23:39:06 2024 +0300
+
+    Translation
+
+[33mcommit 046756e80e8c70e29bebf44cb666da02813b7ee7[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Tue Jul 16 15:31:00 2024 +0300
+
+    add
+
+[33mcommit 3b3b5c766ceac8845844716b570d3d2262b7632c[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Mon Jul 15 23:49:54 2024 +0300
+
+    addProductApi
+
+[33mcommit fc44bcefd67ab2e8cc81a06856793389b2e7377e[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Sun Jul 14 13:29:54 2024 +0300
+
+    addMulti-guard
+
+[33mcommit e1e29ef4295044aa59ae7163faa67e4095b06f91[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Sun Jul 14 11:24:49 2024 +0300
+
+    addLaravelFortify
+
+[33mcommit 2fd13972e1808ffa83cf32f41f1acb6ac30fed15[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Sat Jul 13 15:41:13 2024 +0300
+
+    Notification with broadcast
+
+[33mcommit a3d5a82ffad85ac2373cb2a368f05f98f835a510[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Thu Jul 11 23:52:15 2024 +0300
+
+    addEvent-Notification
+
+[33mcommit 6988426ad18d2702cd849fb32dd263590c80e1f1[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Wed Jul 10 15:29:48 2024 +0300
+
+    Checkout
+
+[33mcommit b4a746eb5e6446e10b60e4d82f15d9fc1e323031[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Fri Jul 5 13:07:28 2024 +0300
+
+    add_update_delete-Ajax
+
+[33mcommit b4f3f23f5f421ea2ff739939aa2f21764a3cc6a7[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Fri Jul 5 09:47:23 2024 +0300
+
+    CartMenu
+
+[33mcommit 6816065ce6a50a01c63894629077d62f52a40a9f[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Thu Jun 27 07:37:42 2024 +0300
+
+    Cart
+
+[33mcommit 67f69495c72a449fc2384fa2825126b12dc0ddc4[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Wed Jun 26 09:04:41 2024 +0300
+
+    add-front-template
+
+[33mcommit 7fe2666b00e7028ac85524c9c81c48dcb69a7fd0[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Tue Jun 25 07:51:18 2024 +0300
+
+    add-relation
+
+[33mcommit dad2e1fd3835e00e69238f8aaa7319593b3887e3[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Mon Jun 24 06:46:02 2024 +0300
+
+    add-relation
+
+[33mcommit 38f6cb01d76866039a7534818a41cd5207be4d81[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Sat Jun 22 06:46:21 2024 +0300
+
+    Category-softDelete
+
+[33mcommit e3a80dbad161e11d5a09c79eb26f17e09e27dd97[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Fri Jun 21 05:12:52 2024 +0300
+
+    Category-Component
+
+[33mcommit f7552909397b470217dd660dd54b6f6097c1681b[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Thu Jun 20 06:45:42 2024 +0300
+
+    Category-Validation
+
+[33mcommit faeffec34dd79baed97cf6536e1af4f023d1765d[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Thu Jun 20 00:11:29 2024 +0300
+
+    file-storage
+
+[33mcommit 1e1e031da8ed1c7bbcbcc6738bb76e78fa93ecee[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Wed Jun 19 22:28:04 2024 +0300
+
+    form-blade
+
+[33mcommit 20d0d739a0d6eec542c6a59a23fd233579444984[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Tue Jun 18 06:38:31 2024 +0300
+
+    CRUD-Categories
+
+[33mcommit ecc79c9214f09cb4dc50377bb3cd1f698ec83551[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Tue Jun 18 02:01:17 2024 +0300
+
+    add-Categories
+
+[33mcommit a614d48528fd5be664b501d01464807139ac3544[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Fri Jun 14 05:54:47 2024 +0300
+
+    add
+
+[33mcommit 44290b753ba885493625044fb93b462cb91f3450[m
+Author: Mohamedwalaa25 <mohamedwalaa250@gmail.com>
+Date:   Thu Jun 13 06:18:43 2024 +0300
+
+    create dashboard

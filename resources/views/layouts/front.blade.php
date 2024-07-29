@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/tiny-slider.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/css/glightbox.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}"/>
-
+    @livewireStyles
+    @notifyCss
 </head>
 
 <body>
@@ -67,14 +68,11 @@
                             <li>
                                 <div class="select-position">
                                     <form action="{{URL::current()}}" method="get" >
-                                    <select name="locale"  onchange="this.form.submit()">
-                                        <option value="en" selected>English</option>
-                                        <option value="1">Español</option>
-                                        <option value="2">Filipino</option>
-                                        <option value="3">Français</option>
-                                        <option value="ar">العربية</option>
-                                        <option value="5">हिन्दी</option>
-                                        <option value="6">বাংলা</option>
+                                        <select name="locale" onchange="this.form.submit()">
+                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                <option value="{{ $localeCode }}" @selected($localeCode == App::currentLocale())>{{ $properties['native'] }}</option>
+                                            @endforeach
+                                        </select>
                                     </select>
                                     </form>
                                 </div>
@@ -85,7 +83,7 @@
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-middle">
                         <ul class="useful-links">
-                            <li><a href="index.html">{{__('Home')}}</a></li>
+                            <li><a href="{{route('home')}}">{{__('Home')}}</a></li>
                             <li><a href="about-us.html">{{__('About Us')}}</a></li>
                             <li><a href="contact.html">{{__('Contact Us')}}</a></li>
                         </ul>
@@ -135,7 +133,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
                     <!-- Start Header Logo -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{route("home")}}">
                         <img src="{{asset('assets/images/logo/logo.svg')}}" alt="Logo">
                     </a>
                     <!-- End Header Logo -->
@@ -183,7 +181,7 @@
                                     <span class="total-items">0</span>
                                 </a>
                             </div>
-                            <x-cart-menu/>
+                            <livewire:cart />
                         </div>
                     </div>
                 </div>
@@ -240,7 +238,7 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a href="index.html" aria-label="Toggle navigation">Home</a>
+                                    <a href="{{route("home")}}" aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dd-menu active collapsed" href="javascript:void(0)"
@@ -331,7 +329,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-12">
                         <div class="footer-logo">
-                            <a href="index.html">
+                            <a href="{{route("home")}}">
                                 <img src="{{asset('assets/images/logo/white-logo.svg')}}" alt="#">
                             </a>
                         </div>
@@ -480,7 +478,8 @@
 <script src="{{asset('assets/js/glightbox.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
 @stack('scripts')
-
+@notifyJs
+@livewireScripts
 </body>
 
 </html>

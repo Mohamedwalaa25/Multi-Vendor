@@ -44,7 +44,6 @@
                                         <span>New line required</span>
                                         iPhone 12 Pro Max
                                     </h2>
-                                    <h3>$259.99</h3>
                                 </div>
                             </div>
                             <!-- End Small Banner -->
@@ -75,115 +74,29 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Featured Categories</h2>
+                        <h2>{{__('Featured Categories')}}</h2>
                         <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                             suffered alteration in some form.</p>
                     </div>
                 </div>
             </div>
             <div class="row">
+                @foreach($featured as $item)
                 <div class="col-lg-4 col-md-6 col-12">
                     <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">TV & Audios</h3>
+                    <div class="single-category" style="padding: 65px;margin-top: 25px;">
+                        <h3 class="heading">{{$item->name}}</h3>
                         <ul>
-                            <li><a href="product-grids.html">Smart Television</a></li>
-                            <li><a href="product-grids.html">QLED TV</a></li>
-                            <li><a href="product-grids.html">Audios</a></li>
-                            <li><a href="product-grids.html">Headphones</a></li>
+                            <li><a href="product-grids.html">{{$item->category->name}}</a></li>
                             <li><a href="product-grids.html">View All</a></li>
                         </ul>
                         <div class="images">
-                            <img src="https://via.placeholder.com/180x180" alt="#">
+                            <img src="{{$item->imageurl}}" alt="#">
                         </div>
                     </div>
                     <!-- End Single Category -->
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">Desktop & Laptop</h3>
-                        <ul>
-                            <li><a href="product-grids.html">Smart Television</a></li>
-                            <li><a href="product-grids.html">QLED TV</a></li>
-                            <li><a href="product-grids.html">Audios</a></li>
-                            <li><a href="product-grids.html">Headphones</a></li>
-                            <li><a href="product-grids.html">View All</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="https://via.placeholder.com/180x180" alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">Cctv Camera</h3>
-                        <ul>
-                            <li><a href="product-grids.html">Smart Television</a></li>
-                            <li><a href="product-grids.html">QLED TV</a></li>
-                            <li><a href="product-grids.html">Audios</a></li>
-                            <li><a href="product-grids.html">Headphones</a></li>
-                            <li><a href="product-grids.html">View All</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="https://via.placeholder.com/180x180" alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">Dslr Camera</h3>
-                        <ul>
-                            <li><a href="product-grids.html">Smart Television</a></li>
-                            <li><a href="product-grids.html">QLED TV</a></li>
-                            <li><a href="product-grids.html">Audios</a></li>
-                            <li><a href="product-grids.html">Headphones</a></li>
-                            <li><a href="product-grids.html">View All</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="https://via.placeholder.com/180x180" alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">Smart Phones</h3>
-                        <ul>
-                            <li><a href="product-grids.html">Smart Television</a></li>
-                            <li><a href="product-grids.html">QLED TV</a></li>
-                            <li><a href="product-grids.html">Audios</a></li>
-                            <li><a href="product-grids.html">Headphones</a></li>
-                            <li><a href="product-grids.html">View All</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="https://via.placeholder.com/180x180" alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
-                    <div class="single-category">
-                        <h3 class="heading">Game Console</h3>
-                        <ul>
-                            <li><a href="product-grids.html">Smart Television</a></li>
-                            <li><a href="product-grids.html">QLED TV</a></li>
-                            <li><a href="product-grids.html">Audios</a></li>
-                            <li><a href="product-grids.html">Headphones</a></li>
-                            <li><a href="product-grids.html">View All</a></li>
-                        </ul>
-                        <div class="images">
-                            <img src="https://via.placeholder.com/180x180" alt="#">
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -201,16 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                @foreach($products as $product)
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Start Single Product -->
-                        <x-product-card :product="$product"  />
-                        <!-- End Single Product -->
-                    </div>
-                @endforeach
-
-            </div>
+          <livewire:productlist />
         </div>
     </section>
     <!-- End Trending Product Area -->
@@ -220,7 +124,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-12">
-                    <div class="single-banner" style="background-image:url('https://via.placeholder.com/620x340')">
+                    <div class="single-banner" style="background-image:url('{{asset('assets/images/hero/banner-1-bg.jpg')}}')">
                         <div class="content">
                             <h2>Smart Watch 2.0</h2>
                             <p>Space Gray Aluminum Case with <br>Black/Volt Real Sport Band </p>
@@ -232,7 +136,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="single-banner custom-responsive-margin"
-                         style="background-image:url('https://via.placeholder.com/620x340')">
+                         style="background-image:url('{{asset('assets/images/hero/banner-2-bg.jpg')}}')">
                         <div class="content">
                             <h2>Smart Headphone</h2>
                             <p>Lorem ipsum dolor sit amet, <br>eiusmod tempor
@@ -340,7 +244,7 @@
                     }
                 });
             });
-            
+
         </script>
     @endpush
 

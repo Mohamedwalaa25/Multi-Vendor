@@ -30,9 +30,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <form action="{{route('checkout')}}" method="post" >
-                    @csrf
-
+                <form action="{{ route('checkout') }}" method="post" id="payment-form">
+                @csrf
                 <div class="checkout-steps-form-style-1">
                     <ul id="accordionExample">
                         <li>
@@ -263,49 +262,13 @@
                             </section>
                         </li>
                         <li>
-                            <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapsefive"
-                                aria-expanded="false" aria-controls="collapsefive">Payment Info</h6>
-                            <section class="checkout-steps-form-content collapse" id="collapsefive"
-                                     aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                            <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">Payment Info</h6>
+                            <section class="checkout-steps-form-content collapse" id="collapsefive" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="checkout-payment-form">
-                                            <div class="single-form form-default">
-                                                <label>Cardholder Name</label>
-                                                <div class="form-input form">
-                                                    <input type="text" placeholder="Cardholder Name">
-                                                </div>
-                                            </div>
-                                            <div class="single-form form-default">
-                                                <label>Card Number</label>
-                                                <div class="form-input form">
-                                                    <input id="credit-input" type="text"
-                                                           placeholder="0000 0000 0000 0000">
-                                                    <img src="assets/images/payment/card.png" alt="card">
-                                                </div>
-                                            </div>
-                                            <div class="payment-card-info">
-                                                <div class="single-form form-default mm-yy">
-                                                    <label>Expiration</label>
-                                                    <div class="expiration d-flex">
-                                                        <div class="form-input form">
-                                                            <input type="text" placeholder="MM">
-                                                        </div>
-                                                        <div class="form-input form">
-                                                            <input type="text" placeholder="YYYY">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-form form-default">
-                                                    <label>CVC/CVV <span><i
-                                                                class="mdi mdi-alert-circle"></i></span></label>
-                                                    <div class="form-input form">
-                                                        <input type="text" placeholder="***">
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="single-form form-default button">
-                                                <button type="submit" class="btn">pay now</button>
+                                                <button type="submit" id="submit" class="btn">pay now</button>
                                             </div>
                                         </div>
                                     </div>
@@ -316,7 +279,6 @@
                 </div>
                 </form>
             </div>
-
             <div class="col-lg-4">
                 <div class="checkout-sidebar">
                     <div class="checkout-sidebar-coupon">
@@ -338,22 +300,14 @@
                         <div class="sub-total-price">
                             <div class="total-price">
                                 <p class="value">Subotal Price:</p>
-                                <p class="price">{{Currency::format($cart->total())}}</p>
-                            </div>
-                            <div class="total-price shipping">
-                                <p class="value">Subotal Price:</p>
-                                <p class="price">$10.50</p>
-                            </div>
-                            <div class="total-price discount">
-                                <p class="value">Subotal Price:</p>
-                                <p class="price">$10.00</p>
+                                <p class="price">{{ Currency::format($cart->total()) }}</p>
                             </div>
                         </div>
 
                         <div class="total-payable">
                             <div class="payable-price">
                                 <p class="value">Subotal Price:</p>
-                                <p class="price">{{Currency::format($cart->total())}}</p>
+                                <p class="price">{{ Currency::format($cart->total()) }}</p>
                             </div>
                         </div>
                         <div class="price-table-btn button">
@@ -362,7 +316,7 @@
                     </div>
                     <div class="checkout-sidebar-banner mt-30">
                         <a href="product-grids.html">
-                            <img src="https://via.placeholder.com/400x330" alt="#">
+                            <img src="{{asset('assets/images/hero/banner.jpg')}}" alt="#">
                         </a>
                     </div>
                 </div>

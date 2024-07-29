@@ -10,9 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-
-
         $products =Product::with('category')->active()->oldest()->take(2)->get();
-        return view('front.home' ,compact('products'));
+        $featured = Product::query()->where('featured','=',1)->with('category')->active()->take(6)->get();
+        return view('front.home' ,compact('products','featured'));
     }
 }
