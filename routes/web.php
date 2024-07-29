@@ -20,7 +20,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+], function() {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [ProductsController::class, 'index'])->name('product.index');
 Route::get('/products/{product:slug}', [ProductsController::class, 'show'])->name('product.show');
@@ -48,7 +51,7 @@ Route::get('orders/{order}/pay/stripe/callback', [PaymentsController::class, 'co
     ->name('stripe.return');
 
 
-//});
+});
 
 //Route::middleware('auth')->group(function () {
 //    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
