@@ -1,5 +1,12 @@
 <x-front-layout title="Home">
-
+    <div id="notify-container" style="
+            position: relative;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 2s ease-in-out; /* يحدث التحول خلال ثانيتين */
+        }">
+        <x-notify::notify/>
+    </div>
 <!-- Start Hero Area -->
     <section class="hero-area">
         <div class="container">

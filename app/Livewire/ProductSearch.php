@@ -43,7 +43,7 @@ class ProductSearch extends Component
     {
         Cart::add($id);
         $this->dispatch('update-cartDetails');
-        $this->dispatch('flash-message');
+        notify()->info('Add Product Success','Success');
 
 
     }

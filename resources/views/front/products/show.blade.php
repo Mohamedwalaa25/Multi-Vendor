@@ -304,8 +304,8 @@
 {{--                        </div>--}}
 {{--                        <div class="col-sm-6">--}}
 {{--                            <div class="form-group">--}}
-{{--                                <label for="review-email">Your Email</label>--}}
-{{--                                <input class="form-control" type="email" id="review-email" required>--}}
+{{--                                <label for="review-emails">Your Email</label>--}}
+{{--                                <input class="form-control" type="emails" id="review-emails" required>--}}
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}

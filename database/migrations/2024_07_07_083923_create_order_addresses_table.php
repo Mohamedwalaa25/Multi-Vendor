@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('type',['billing','shipping']);
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->nullable();
+            $table->string('emails')->nullable();
             $table->string('phone_number');
             $table->string('street_address');
             $table->string('city');

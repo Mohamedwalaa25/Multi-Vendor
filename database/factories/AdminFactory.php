@@ -20,7 +20,7 @@ class AdminFactory extends Factory
     {
         return [
             'name' =>  $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail(),
+            'emails' => $this->faker->unique()->safeEmail(),
             'username'=>$this->faker->userName,
             'phone_number'=> $this->faker->phoneNumber,
             'password' => Hash::make('password'),

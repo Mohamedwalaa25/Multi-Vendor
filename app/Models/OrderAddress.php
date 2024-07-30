@@ -15,7 +15,7 @@ class OrderAddress extends Model
         'type',
         'first_name',
         'last_name',
-        'email',
+        'emails',
         'phone_number',
         'street_address',
         'city',

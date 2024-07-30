@@ -34,7 +34,7 @@ class SocialLoginController extends Controller
             if (!$user) {
                 $user = User::create([
                     'name' => $provider_user->name,
-                    'email' => $provider_user->email,
+                    'emails' => $provider_user->email,
                     'password' => Hash::make(Str::random(8)),
                     'provider' => $provider,
                     'provider_id' => $provider_user->id,
@@ -48,7 +48,7 @@ class SocialLoginController extends Controller
 
         } catch (Throwable $e) {
             return redirect()->route('login')->withErrors([
-                'email' => $e->getMessage(),
+                'emails' => $e->getMessage(),
             ]);
         }
     }

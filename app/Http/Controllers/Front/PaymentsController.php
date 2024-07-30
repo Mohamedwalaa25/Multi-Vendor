@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\PaymentCompleted;
 use App\Facades\cart;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -70,11 +71,12 @@ class PaymentsController extends Controller
                 return;
             }
 
-            event('payment.created', $payment->id);
-
+            event(new PaymentCompleted($payment));
+            notify()->info('Done Order','Success');
             return redirect()->route('home', [
                 'status' => 'payement-succeeded'
             ]);
+
         }
 
         return redirect()->route('orders.payments.create', [

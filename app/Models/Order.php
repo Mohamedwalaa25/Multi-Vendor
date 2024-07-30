@@ -22,6 +22,10 @@ class Order extends Model
             'name'=>'Guest Customer'
         ]);
     }
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
     public function items()
     {
         return $this->hasMany(OrderItem::class, 'order_id');
