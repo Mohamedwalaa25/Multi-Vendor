@@ -1,5 +1,13 @@
 <!-- Shopping Cart -->
 <div class="shopping-cart section">
+    <div id="notify-container" style="
+            position: relative;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 2s ease-in-out; /* يحدث التحول خلال ثانيتين */
+        }">
+        <x-notify::notify/>
+    </div>
     <div class="container">
         <div class="cart-list-head">
             <!-- Cart List Title -->
@@ -41,18 +49,19 @@
                                 </a>
                             </h5>
                             <p class="product-des">
-                                <span><em>Type:</em> Mirrorless</span>
-                                <span><em>Color:</em> Black</span>
+                                <span><em>Category:</em> {{$item->product->category->name}}</span>
+                                <span><em>Price:</em> {{$item->product->price}}</span>
+
                             </p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
                             <div class="quantity-controls d-flex justify-center md:justify-end">
                                 <div class="quantity-wrapper w-100 d-flex align-items-center">
-                                    <button class="decrement-btn bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 rounded-l cursor-pointer" wire:click.prevent="decrementQty({{ $item->id }})">
+                                    <button class="decrement-btn bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 rounded-l cursor-pointer" wire:click="decrementQty('{{ $item->id }}')">
                                         <span class="m-auto text-2xl font-thin">−</span>
                                     </button>
                                     <span class="quantity-display p-2">{{ $item->quantity }}</span>
-                                    <button class="increment-btn bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 rounded-r cursor-pointer" wire:click="incrementQty({{ $item->id }})">
+                                    <button class="increment-btn bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 rounded-r cursor-pointer" wire:click="incrementQty('{{ $item->id }}')">
                                         <span class="m-auto text-2xl font-thin">+</span>
                                     </button>
                                 </div>
@@ -100,8 +109,8 @@
                                         <li class="last">You Pay <span>{{ Currency::format($total) }}</span></li>
                                     </ul>
                                     <div class="button">
-                                        <a href="checkout.html" class="btn">Checkout</a>
-                                        <a href="product-grids.html" class="btn btn-alt">Continue Shopping</a>
+                                        <a href="{{route('checkout')}}" class="btn">Checkout</a>
+                                        <a href="{{route('checkout')}}" class="btn btn-alt">Continue Shopping</a>
                                     </div>
                                 </div>
                             </div>

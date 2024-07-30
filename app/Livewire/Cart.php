@@ -28,6 +28,7 @@ class Cart extends Component
         \App\Facades\cart::delete($id);
         $this->loadCart();
         $this->dispatch('updateCartCounter');
+        $this->dispatch('all-cart');
     }
 
     public function render()

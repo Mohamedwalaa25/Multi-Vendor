@@ -201,31 +201,31 @@
                     <div class="mega-category-menu">
                         <span class="cat-button"><i class="lni lni-menu"></i>{{ __('All Categories') }}</span>
                         <ul class="sub-category">
-                            <li><a href="product-grids.html">{{ __('Electronics') }} <i class="lni lni-chevron-right"></i></a>
+                            <li><a href="{{route("product.index")}}">{{ __('Electronics') }} <i class="lni lni-chevron-right"></i></a>
                                 <ul class="inner-sub-category">
-                                    <li><a href="product-grids.html">{{ __('Digital Cameras') }}</a></li>
-                                    <li><a href="product-grids.html">{{ __('Camcorders') }}</a></li>
-                                    <li><a href="product-grids.html">{{ __('Camera Drones') }}</a></li>
-                                    <li><a href="product-grids.html">{{ __('Smart Watches') }}</a></li>
-                                    <li><a href="product-grids.html">{{ __('Headphones') }}</a></li>
-                                    <li><a href="product-grids.html">{{ __('MP3 Players') }}</a></li>
-                                    <li><a href="product-grids.html">{{ __('Microphones') }}</a></li>
-                                    <li><a href="product-grids.html">{{ __('Chargers') }}</a></li>
-                                    <li><a href="product-grids.html">{{ __('Batteries') }}</a></li>
-                                    <li><a href="product-grids.html">{{ __('Cables & Adapters') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('Digital Cameras') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('Camcorders') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('Camera Drones') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('Smart Watches') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('Headphones') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('MP3 Players') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('Microphones') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('Chargers') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('Batteries') }}</a></li>
+                                    <li><a href="{{route("product.index")}}">{{ __('Cables & Adapters') }}</a></li>
                                 </ul>
                             </li>
-                            <li><a href="product-grids.html">{{ __('Accessories') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Televisions') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Best Selling') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Top 100 Offer') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Sunglass') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Watch') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Man’s Product') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Home Audio & Theater') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Computers & Tablets') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Video Games') }}</a></li>
-                            <li><a href="product-grids.html">{{ __('Home Appliances') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Accessories') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Televisions') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Best Selling') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Top 100 Offer') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Sunglass') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Watch') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Man’s Product') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Home Audio & Theater') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Computers & Tablets') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Video Games') }}</a></li>
+                            <li><a href="{{route("product.index")}}">{{ __('Home Appliances') }}</a></li>
                         </ul>
                     </div>
                     <!-- End Mega Category Menu -->
@@ -262,7 +262,7 @@
                                        data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
                                        aria-expanded="false" aria-label="Toggle navigation">{{ __('Shop') }}</a>
                                     <ul class="sub-menu collapse" id="submenu-1-3">
-                                        <li class="nav-item"><a href="product-grids.html">{{ __('Shop Grid') }}</a></li>
+                                        <li class="nav-item"><a href="{{route("product.index")}}">{{ __('Shop Grid') }}</a></li>
                                         <li class="nav-item"><a href="product-list.html">{{ __('Shop List') }}</a></li>
                                         <li class="nav-item"><a href="product-details.html">{{ __('Shop Single') }}</a></li>
                                         <li class="nav-item"><a href="cart.html">{{ __('Cart') }}</a></li>

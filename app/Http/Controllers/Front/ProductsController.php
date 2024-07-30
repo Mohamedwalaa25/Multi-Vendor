@@ -10,7 +10,8 @@ class ProductsController extends Controller
 {
     public function index()
     {
-
+//        $products = Product::active()->latest()->paginate(9);
+        return view('front.allproducts');
     }
 
     public function show(Product $product)

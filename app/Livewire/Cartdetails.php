@@ -9,33 +9,28 @@ class Cartdetails extends Component
 {
     public $cart;
     public $total;
-    protected $listeners = ['total-number' => 'totalnumber'];
+    protected $listeners = ['total-number' => 'totalnumber',
+        'all-cart' => 'allcart',
+    ];
 
-    public function mount($cart)
+    public function mount()
     {
         $this->cart = cart::get();
         $this->total = cart::total();
-
-
     }
 
     public function delete_item($id)
     {
         \App\Facades\cart::delete($id);
-        $this->dispatch('updateCartCount');
-        $this->dispatch('total-number');
+        $this->dispatch('update-cartDetails');
+        $this->totalnumber();
+        notify()->info('Delete Product Successfully', 'Success');
+
     }
 
-    public function increase_quantity($id_cartitem)
+    public function allcart()
     {
-
-        $cart_item = \App\Models\Cart::find($id_cartitem);
-        $quantity = $cart_item->quantity;
-
-        $cart_item->update([
-            'quantity' => $quantity + 1,
-
-        ]);
+        $this->cart = cart::get();
     }
 
     public function render()
@@ -50,22 +45,28 @@ class Cartdetails extends Component
 
     public function incrementQty($id)
     {
-        $cart = Cart::whereId($id)->first();
-        $cart->quantity += 1;
-        $cart->save();
-
-        session()->flash('success', 'Product quantity updated !!!');
+        $cart = \App\Models\Cart::find($id);
+        if ($cart) {
+            $cart->quantity += 1;
+            $cart->save();
+            $this->cart = cart::get(); // Update the cart property
+            $this->totalnumber(); // Update the total property
+            notify()->info('Increment Quantity Successfully', 'Success');
+        }
     }
 
     public function decrementQty($id)
     {
-        $cart = Cart::whereId($id)->first();
-        if ($cart->quantity > 1) {
+        $cart = \App\Models\Cart::find($id);
+        if ($cart && $cart->quantity > 1) {
             $cart->quantity -= 1;
             $cart->save();
-            session()->flash('success', 'Product quantity updated !!!');
+            $this->cart = cart::get(); // Update the cart property
+            $this->totalnumber(); // Update the total property
+            notify()->info('Decrement Quantity Successfully', 'Success');
+
         } else {
-            session()->flash('info', 'You cannot have less than 1 quantity');
+            notify()->error("You Can't Decrement More", 'Error');
         }
     }
 }
