@@ -1,95 +1,93 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Products;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProducttRequest;
+use Illuminate\Support\Facades\Storage;
+use App\Interfaces\ProductRepositoryInterface;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $productRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
 
-        $products = Product::with(['category', 'store'])->paginate(10);
+        $this->productRepository = $productRepository;
+    }
+
+    public function index(Request $request)
+    {
+        $products = $this->productRepository->getAllProducts($request);
 
         return view('dashboard.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $categories = $this->productRepository->getCategories();
+
+        return view('dashboard.products.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(ProducttRequest $request)
     {
-        //
+        $request->validated();
+
+        $data = $request->except('image');
+        $data['image'] = $this->productRepository->uploadImage($request);
+
+        $this->productRepository->createProduct($data);
+        return redirect()->route('products.index')->with('success', "Product Created !");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+
+        $product = $this->productRepository->getProductById($id);
+
+        return view('dashboard.products.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        $tags = implode(",", $product->tags()->pluck('name')->toArray());
-        $categories = Category::all();
-        return view('dashboard.products.edit', compact('product', 'categories','tags'));
+        $product = $this->productRepository->getProductById($id);
+        $categories = $this->productRepository->getCategories();
 
+        return view('dashboard.products.edit', compact('product', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Product $product)
+    public function update(ProducttRequest $request, $id)
     {
-        $product->update($request->except('tags'));
+        $request->validated();
 
-        $tags =explode(',', $request->input('tags'));
-        $tag_ids = [];
-        $save_tag = Tag::all();
-        foreach ($tags as $t_name){
-            $slug =Str::slug($t_name);
-            $tag = $save_tag->where('slug',$slug)->first();
-            if(!$tag){
-                $tag=Tag::create([
-                    'name'=>$t_name,
-                    'slug'=>$slug
-                ]);
-            }
-            $tag_ids[] = $tag->id;
+        $product = $this->productRepository->getProductById($id);
+
+        $old_image = $product->image;
+        $data = $request->except('image');
+
+        $new_image = $this->productRepository->uploadImage($request);
+
+        if ($new_image) {
+            $data['image'] = $new_image;
         }
-        $product->tags()->sync($tag_ids);
 
-        return redirect()->route('products.index')->with('success','Product Update !');
+        $this->productRepository->updateProduct($product, $data);
+
+        if ($old_image && $new_image) {
+            Storage::disk('public')->delete($old_image);
+        }
+
+        return redirect()->route('products.index')->with('success', 'Product Updated !');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $product = $this->productRepository->getProductById($id);
+
+        $this->productRepository->deleteProduct($product);
+        return redirect()->route('products.index')->with('success', 'Product Deleted !');
     }
 }

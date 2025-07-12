@@ -12,7 +12,7 @@
     @foreach ($order->products as $product)
         <li>Product: {{ $product->name }}</li>
     @endforeach
-    <li>Total: {{ $order->total }}</li>
+
 </ul>
 <p>Thank you for your purchase!</p>
 </body>

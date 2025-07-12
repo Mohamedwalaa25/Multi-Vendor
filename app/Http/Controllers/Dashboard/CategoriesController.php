@@ -2,155 +2,74 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use App\Interfaces\CategoryRepositoryInterface;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     public function index(Request $request)
     {
-       //SELECT a.*,b.name as parent_name
-        // categories as a
-        // Left JOIN categories as b on b.id = a.parent_id
+        $categories = $this->categoryRepository->getAllCategories($request);
 
-        $categories = Category::query()->leftJoin('categories as parents',
-            'parents.id','=','categories.parent_id')
-            ->select([
-                'categories.*',
-                'parents.name as parent_name'  // => with('parent') relation name
-            ])->selectRaw('(SELECT COUNT(*) FROM products WHERE category_id = categories.id) as products_count') //=>withCount('products) relation name =>relation_name_count
-
-            ->filter($request->query())->paginate(5);
         return view('dashboard.categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $parents = Category::all();
-        $category = new Category();
-        return view('dashboard.categories.create', compact("category", 'parents'));
-
+        return view('dashboard.categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(CategoryRequest $request)
     {
+        $data = $request->validated();
 
-        $request->validated();
-        $request->merge([
-            'slug' => Str::slug($request->input('name'))
-        ]);
-
-        $data = $request->except('image');
-        $data['image'] = $this->uploadImage($request);
-
-
-        $category = Category::create($data);
-
-        return redirect()->route('categories.index')->with('success', "Category Created !");
+        $this->categoryRepository->createCategory($data);
+        return redirect()->route('categories.index')->with('success', "Category Created!");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
+    public function show($id)
     {
+
+        $category = $this->categoryRepository->getCategoryById($id);
 
         return view('dashboard.categories.show', compact('category'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
-        $category = Category::query()->findOrFail($id);
-
-        $parents = Category::where('id', "<>", $id)
-            ->where(function ($query) use ($id) {
-                $query->whereNull('parent_id')
-                    ->orWhere('parent_id', "<>", $id);
-            })->get();
-
-        return view('dashboard.categories.edit', compact('category', 'parents'));
+        $category = $this->categoryRepository->getCategoryById($id);
+        return view('dashboard.categories.edit', compact('category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(CategoryRequest $request, string $id)
+    public function update(CategoryRequest $request, $id)
     {
+        $data = $request->validated();
 
-        $category = Category::query()->findOrFail($id);
-        $old_image = $category->image;
-        $data = $request->except('image');
-        $new_image = $this->uploadImage($request);
-        if ($new_image) {
-            $data['image'] = $new_image;
-        }
-        $category->update($data);
+        $category = $this->categoryRepository->getCategoryById($id);
+        $this->categoryRepository->updateCategory($category, $data);
 
-        if ($old_image && $new_image) {
-            Storage::disk('public')->delete($old_image);
-        }
-
-        return redirect()->route('categories.index')->with('update', "Category Update !");
+        return redirect()->route('categories.index')->with('success', "Category Updated!");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $category = Category::query()->findOrFail($id);
-        $category->delete();
+        $category = $this->categoryRepository->getCategoryById($id);
 
-        return redirect()->route('categories.index')->with('delete', "Category Delete !");
-    }
+        $this->categoryRepository->deleteCategory($category);
 
-    protected function uploadImage(Request $request)
-    {
-        if (!$request->hasFile('image')) {
-            return;
-        }
-        $file = $request->file('image');
-        $path = $file->store('uploads', 'public');
-        return $path;
-    }
-
-    public function trash()
-    {
-        $categories = Category::onlyTrashed()->paginate();
-        return view('dashboard.categories.trash',compact('categories'));
-    }
-    public function restore(Request $request ,$id )
-    {
-        $category = Category::onlyTrashed()->findOrFail($id);
-        $category->restore();
-        return redirect()->route('categories.trash')
-            ->with('success','Category Restored !');
-    }
-    public function forceDelete($id)
-    {
-        $category = Category::onlyTrashed()->findOrFail($id);
-        $category->forceDelete();
-        if ($category->image) {
-            Storage::disk('public')->delete($category->image);
-        }
-        return redirect()->route('categories.trash')
-            ->with('success','Category deleted !');
+        return redirect()->route('categories.index')->with('success', "Category Deleted!");
     }
 
 }
